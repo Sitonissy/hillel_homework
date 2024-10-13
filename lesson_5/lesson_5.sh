@@ -52,7 +52,7 @@ echo "$user run a script from $dir with '$opt' argument at $time with PID $$" >>
   else              #start program
       case ${opt} in #checking argument value
         e)                      #code for ending (first argument by alphabet)
-          if [ -e $3 ]; then
+          if [ -f $3 ]; then
             end= awk '/'$2'$/' $3
             endcount=$(awk '/'$2'$/' $3 | wc -l)
             echo -e "$endcount words ending in '$2' are found in $3."
@@ -64,7 +64,7 @@ echo "$user run a script from $dir with '$opt' argument at $time with PID $$" >>
           help
           ;;
         l)                      #code for len (third argument by alphabet)
-          if [ -e $4 ]; then
+          if [ -f $4 ]; then
             len= awk 'length($0)>='$2' && length($0)<='$3'' $4
             lencount=$(awk 'length($0)>='$2' && length($0)<='$3'' $4 | wc -l)
             echo -e "$lencount words from $2 to $3 symbols are found in $4."
@@ -73,7 +73,7 @@ echo "$user run a script from $dir with '$opt' argument at $time with PID $$" >>
           fi
           ;;
         s)                      #code for start (four argument by alphabet)
-        if [ -e $3 ]; then
+        if [ -f $3 ]; then
             start= awk '/^'$2'/' $3
             startcount=$(awk '/^'$2'/' $3 | wc -l)
             echo -e "$startcount words starting from '$2' are found in $3."
@@ -87,6 +87,6 @@ echo "$user run a script from $dir with '$opt' argument at $time with PID $$" >>
           ;;
       esac
   fi
-  echo "Script with $$ PID from $user with '$opt' argument has been ended at $time" >> $logfile #adding information ro log
+  echo "Script with $$ PID from $user with '$opt' argument has been ended at `date '+%X'`" >> $logfile #adding information ro log
 done
 rm -rf tmp.txt        #remove temporary file for filter arguments
