@@ -53,7 +53,8 @@ echo "$user run a script from $dir with '$opt' argument at $time with PID $$" >>
       case ${opt} in #checking argument value
         e)                      #code for ending (first argument by alphabet)
           if [ -f $3 ]; then
-            end= awk '/'$2'$/' "$3"
+            end=$(awk '/'$2'$/' "$3")
+            echo -e $end | tr ' ' '\n'
             endcount=$(awk '/'$2'$/' "$3" | wc -l)
             echo -e "$endcount words ending in '$2' are found in $3."
           else
@@ -65,7 +66,8 @@ echo "$user run a script from $dir with '$opt' argument at $time with PID $$" >>
           ;;
         l)                      #code for len (third argument by alphabet)
           if [ -f $4 ]; then
-            len= awk 'length($0)>='$2' && length($0)<='$3'' "$4"
+            len=$(awk 'length($0)>='$2' && length($0)<='$3'' "$4")
+            echo -e $len | tr ' ' '\n'
             lencount=$(awk 'length($0)>='$2' && length($0)<='$3'' "$4" | wc -l)
             echo -e "$lencount words from $2 to $3 symbols are found in "$4"."
           else
@@ -74,7 +76,8 @@ echo "$user run a script from $dir with '$opt' argument at $time with PID $$" >>
           ;;
         s)                      #code for start (four argument by alphabet)
         if [ -f $3 ]; then
-            start= awk '/^'$2'/' "$3"
+            start=$(awk '/^'$2'/' "$3")
+            echo -e $start | tr ' ' '\n'
             startcount=$(awk '/^'$2'/' "$3" | wc -l)
             echo -e "$startcount words starting from '$2' are found in $3."
           else
