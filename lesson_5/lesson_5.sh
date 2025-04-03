@@ -36,7 +36,6 @@ help()
 #global variables
 logfile=dictionary.log
 user=`whoami`
-time=`date '+%X'`
 dir=`pwd`
 
 #Main program with arguments
